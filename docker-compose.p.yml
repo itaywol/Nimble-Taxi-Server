@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  nimble-taxi-server:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3001:3001
+      - 9229:9229
+    command: sh -c 'npm run build && npm run start:prod'
