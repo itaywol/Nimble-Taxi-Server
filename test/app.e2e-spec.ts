@@ -1,28 +1,24 @@
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
-<<<<<<< HEAD
-import { AppModule } from './../src/app.module';
-=======
-import { AppModule } from '../src/controllers/app.module';
->>>>>>> d96ce3de6f91b3d229723210d91ff478e8aba5c1
 import { INestApplication } from '@nestjs/common';
+import { IdentityModule } from 'src/controllers/IdentityController/identity.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [IdentityModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/ (POST)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .post('/identity')
       .expect(200)
-      .expect('Hello World!');
+      .expect('[]');
   });
 });
