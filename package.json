@@ -22,11 +22,12 @@
     "docker:p": "docker-compose -f docker-compose.p.yml up"
   },
   "dependencies": {
-    "@nestjs/common": "^6.0.4",
-    "@nestjs/core": "^6.0.4",
-    "@nestjs/microservices": "^6.0.4",
-    "@nestjs/platform-express": "^6.0.4",
-    "@nestjs/websockets": "^6.0.4",
+    "@nestjs/common": "^6.5.2",
+    "@nestjs/core": "^6.5.2",
+    "@nestjs/microservices": "^6.5.2",
+    "@nestjs/platform-express": "^6.5.2",
+    "@nestjs/websockets": "^6.5.2",
+    "nexmo": "^2.4.1",
     "reflect-metadata": "0.1.13",
     "rimraf": "2.6.3",
     "rxjs": "6.4.0",
@@ -41,9 +42,9 @@
     "@types/twilio": "0.0.10",
     "bull": "^3.10.0",
     "concurrently": "^4.1.0",
-    "jest": "^24.7.1",
+    "jest": "^24.8.0",
     "jest-cli": "^24.8.0",
-    "mongoose": "^5.6.3",
+    "mongoose": "^5.6.4",
     "nodemon": "1.18.11",
     "prettier": "1.17.0",
     "supertest": "4.0.2",
@@ -52,7 +53,7 @@
     "tsconfig-paths": "3.8.0",
     "tslint": "5.16.0",
     "typescript": "3.4.3",
-    "wait-on": "^3.2.0"
+    "wait-on": "^3.3.0"
   },
   "jest": {
     "moduleFileExtensions": [
