@@ -14,7 +14,7 @@ export class SmsmessagerService {
      
   }
 
-  compose = (to: string, additionalText:string) => {
+  composeVerifyMessage = (to: string, additionalText:string) => {
     try{
         let placeHolderPhone;
         placeHolderPhone = this.convertFromLocalToGlobal(to);
@@ -24,7 +24,6 @@ export class SmsmessagerService {
         }
         const from = Config.smsapi_brandName;
         const text = Config.smsapi_prefix_message + additionalText;
-        this.loggerService.log(`Sending Phone Number: ${placeHolderPhone}`);
         nexmo.message.sendSms(from,placeHolderPhone,text);
     }catch(e)
     {

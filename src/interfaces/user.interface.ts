@@ -1,10 +1,13 @@
 import { Roles } from "src/enums/roles.enum";
 
-export interface User {
-    id:number,
-    phoneNumber:string,
-    fullName:string,
-    Verified:boolean,
-    role:Roles,
+export interface IUser {
+    phoneNumber:string;
+    fullName:string;
+    password:string;
+    rememberMe:Boolean;
+    Verified:boolean;
+    role:Roles;
     
 }
+
+

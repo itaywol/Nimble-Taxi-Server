@@ -6,7 +6,6 @@ export class LoggerService extends Logger{
         super.error(message,trace);
     }
     log(message: any, context?: string): void {
-        message = `[${new Date().toISOString()}] - ${message}`
         super.log(message,context);
     }
     warn(message: any, context?: string): void {
