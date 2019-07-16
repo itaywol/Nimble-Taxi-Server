@@ -11,8 +11,8 @@ import {
 import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { UserDto } from 'src/auth/dto/user-dto';
-import { IUser } from 'src/interfaces/user.interface';
-import { IVerify } from 'src/interfaces/verify.interface';
+import { IUser } from 'src/auth/interfaces/user.interface';
+import { IVerify } from 'src/auth/interfaces/verify.interface';
 
 @Controller('auth')
 export class AuthController {

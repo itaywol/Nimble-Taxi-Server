@@ -9,12 +9,12 @@ import { SmsmessagerService } from 'src/smsmessager/smsmessager.service';
 import { HelperModuleService } from 'src/helper-module/helper-module.service';
 import { Request } from 'express';
 import { UserDto } from 'src/auth/dto/user-dto';
-import { IUser } from 'src/interfaces/user.interface';
+import { IUser } from 'src/auth/interfaces/user.interface';
 import { LoggerService } from 'src/logger/logger.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import Config from 'config';
-import { IVerify } from 'src/interfaces/verify.interface';
+import { IVerify } from 'src/auth/interfaces/verify.interface';
 import { stringify } from 'querystring';
 
 @Injectable()
