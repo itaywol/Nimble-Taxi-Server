@@ -7,9 +7,9 @@ export class HelperModuleService {
 
     generateDigitalNumber = (digitsCount:number) => {
 
-        if(digitsCount<=0)
+        if(digitsCount<=0 || typeof(digitsCount) === 'number')
         {
-            this.loggerService.error("Tryed to generate a number and recieved wrong digits amount falling back to 6 digits");
+            this.loggerService.error("Tryed to generate a number and recieved wrong digits amount or wrong type falling back to 6 digits");
             digitsCount = 6;
         }
         let stringTemplate = "";

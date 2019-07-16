@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { AuthService } from './auth.service';
-import { UserDto } from 'src/dto/user-dto';
+import { UserDto } from 'src/auth/dto/user-dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { IVerify } from 'src/interfaces/verify.interface';
 
