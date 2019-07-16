@@ -4,6 +4,6 @@ import { SmsmessagerService } from './smsmessager.service';
 @Global()
 @Module({
   providers: [SmsmessagerService],
-  exports: [SmsmessagerService]
+  exports: [SmsmessagerService],
 })
 export class SmsmessagerModule {}

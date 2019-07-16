@@ -58,17 +58,16 @@ export class AuthService {
   }
 
   async registerUser(userData: UserDto) {
-  
     const checkIfRegistered = await this.fetchOneUser(userData);
     if (checkIfRegistered) {
-      const {password, ...result} = userData;
+      const { password, ...result } = userData;
       return result;
     }
     const user: IUser = { ...userData, Verified: false };
     const createdUser = new this.usersModel(user);
     await this.generateVerficationSms(userData);
     const writtenUser = await createdUser.save();
-    const { password, ...result} = user;
+    const { password, ...result } = user;
     LoggerService.log('Registered new User: ' + JSON.stringify(userData));
     return result;
   }

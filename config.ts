@@ -1,5 +1,3 @@
-
-
 export default class Config
 {
     static readonly smsapi_key:string = "6675f0e4";

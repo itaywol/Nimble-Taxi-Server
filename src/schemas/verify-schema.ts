@@ -1,7 +1,6 @@
-
-import * as mongoose from "mongoose";
+import * as mongoose from 'mongoose';
 
 export const VerifySchema = new mongoose.Schema({
-    phoneNumber: String,
-    code: String
+  phoneNumber: String,
+  code: String,
 });

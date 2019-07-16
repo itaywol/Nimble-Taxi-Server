@@ -1,7 +1,6 @@
-
-export enum Roles{
-    Customer,
-    Driver,
-    Manager,
-    Developer,
+export enum Roles {
+  Customer,
+  Driver,
+  Manager,
+  Developer,
 }

@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { RouterModule } from './router.module';
 import { LoggerService } from './logger/logger.service';
-require('dotenv').config();
+import 'dotenv/config';
 
 async function bootstrap() {
-  const router = await NestFactory.create(RouterModule, {logger:false});
+  const router = await NestFactory.create(RouterModule, { logger: false });
   router.useLogger(router.get(LoggerService));
   router.enableCors();
   await router.listen(3001);

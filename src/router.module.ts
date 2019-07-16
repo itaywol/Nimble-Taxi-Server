@@ -1,4 +1,9 @@
-import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import {
+  Module,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
+} from '@nestjs/common';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
@@ -12,9 +17,15 @@ import { RequestModule } from './request/request.module';
 import Config from 'config';
 
 @Module({
-  imports: [AuthModule, LoggerModule, HelperModuleModule, SmsmessagerModule, MongooseModule.forRoot(Config.mongodb_path), RequestModule],
+  imports: [
+    AuthModule,
+    LoggerModule,
+    HelperModuleModule,
+    SmsmessagerModule,
+    MongooseModule.forRoot(Config.mongodb_path),
+    RequestModule,
+  ],
   providers: [LoggerService],
-  controllers: [RequestController]
+  controllers: [RequestController],
 })
 export class RouterModule {}
-

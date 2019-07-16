@@ -1,6 +1,3 @@
-export class UpdateRequestDto{
-    
-    currentDriverLocation:string;
-
-
+export class UpdateRequestDto {
+  currentDriverLocation: string;
 }

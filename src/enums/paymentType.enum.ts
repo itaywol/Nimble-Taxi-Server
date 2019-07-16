@@ -1,5 +1,4 @@
-
-export enum PaymentType{
-    Cash,
-    CreditCard
+export enum PaymentType {
+  Cash,
+  CreditCard,
 }

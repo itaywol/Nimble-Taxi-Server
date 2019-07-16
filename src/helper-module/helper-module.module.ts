@@ -7,6 +7,5 @@ import { LoggerService } from 'src/logger/logger.service';
   providers: [HelperModuleService],
   imports: [LoggerService],
   exports: [HelperModuleService],
-  
 })
 export class HelperModuleModule {}

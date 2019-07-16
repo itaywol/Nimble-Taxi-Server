@@ -1,9 +1,6 @@
-import { Roles } from "src/enums/roles.enum";
+import { Roles } from 'src/enums/roles.enum';
 
 export interface IVerify {
-    phoneNumber:string;
-    code:string;
-    
+  phoneNumber: string;
+  code: string;
 }
-
-

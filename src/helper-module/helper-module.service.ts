@@ -3,22 +3,22 @@ import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class HelperModuleService {
-    constructor(private readonly loggerService:LoggerService){}
+  constructor(private readonly loggerService: LoggerService) {}
 
-    generateDigitalNumber = (digitsCount:number) => {
-
-        if(digitsCount<=0 || typeof(digitsCount) === 'number')
-        {
-            this.loggerService.error("Tryed to generate a number and recieved wrong digits amount or wrong type falling back to 6 digits");
-            digitsCount = 6;
-        }
-        let stringTemplate = "";
-        for(let i=0;i<digitsCount;i++)
-        {
-            stringTemplate += Math.round(Math.random()*9);
-        }
-        this.loggerService.log(`Generated ${digitsCount} digits number: ${stringTemplate}`);
-        return stringTemplate;
-
+  generateDigitalNumber = (digitsCount: number) => {
+    if (digitsCount <= 0 || typeof digitsCount === 'number') {
+      this.loggerService.error(
+        'Tryed to generate a number and recieved wrong digits amount or wrong type falling back to 6 digits',
+      );
+      digitsCount = 6;
     }
+    let stringTemplate = '';
+    for (let i = 0; i < digitsCount; i++) {
+      stringTemplate += Math.round(Math.random() * 9);
+    }
+    this.loggerService.log(
+      `Generated ${digitsCount} digits number: ${stringTemplate}`,
+    );
+    return stringTemplate;
+  };
 }
