@@ -1,9 +1,7 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
-import nexmo = require("nexmo");
-import { LoggerService } from 'src/logger/logger.service';
+import nexmo = require('nexmo');
+import { LoggerService } from '../logger/logger.service';
 import 'dotenv/config';
-
-
 
 @Injectable()
 export class SmsmessagerService {
@@ -13,7 +11,7 @@ export class SmsmessagerService {
   });
   constructor(private readonly loggerService: LoggerService) {}
 
-  composeVerifyMessage(to: string, additionalText: string){
+  composeVerifyMessage(to: string, additionalText: string) {
     try {
       let placeHolderPhone;
       placeHolderPhone = this.convertFromLocalToGlobal(to);
@@ -28,16 +26,16 @@ export class SmsmessagerService {
         'Got a bad phone number or couldnt connect to sms api - ' + e,
       );
     }
-  };
+  }
 
-  validatePhoneNumber(phoneNumber: string){
+  validatePhoneNumber(phoneNumber: string) {
     if (phoneNumber.length == 12) {
       return true;
     }
     return false;
-  };
+  }
 
-  convertFromLocalToGlobal(phoneNumber: string){
+  convertFromLocalToGlobal(phoneNumber: string) {
     if (phoneNumber.indexOf('0') == 0) {
       return phoneNumber.slice(1).padStart(3, '972');
     }
@@ -45,5 +43,5 @@ export class SmsmessagerService {
       return phoneNumber.slice(1);
     }
     return phoneNumber;
-  };
+  }
 }

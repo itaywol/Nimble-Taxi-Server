@@ -1,12 +1,61 @@
-version: '3'
+version: '2'
 
 services:
   nimble-taxi-server:
     build: .
     volumes:
+      - ./src/secret:/usr/src/app/secret
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
       - 3001:3001
       - 9229:9229
-    command: sh -c 'npm run build && npm run start:prod'
+    environment:
+      - NODE_ENV=production
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - mongodatabase
+      - redis
+    links:
+      - mongodatabase
+      - redis
+    networks:
+      back:
+        ipv4_address: 172.21.0.8
+    command: sh -c 'npm run build && npm run start:prod'  
+  mongodatabase:
+    image: mongo:latest
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+      - MONGODB_DATABASE="nimble"
+      - MONGODB_USER="root"
+      - MONGODB_PASS="toor"
+    volumes:
+      - /data/db
+    ports:
+      - 27017:27017
+    expose:
+      - "27017"
+    networks:
+      back:
+        ipv4_address: 172.21.0.9
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    expose:
+      - "6379"
+    networks:
+      back:
+        ipv4_address: 172.21.0.10
+networks:
+  back:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/16
+    
+
+
+

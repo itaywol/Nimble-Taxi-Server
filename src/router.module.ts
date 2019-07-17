@@ -9,8 +9,8 @@ import { TaxiModule } from './taxi-manager/taxi/taxi.module';
 import { GoogleModule } from './google/google.module';
 import { GoogleService } from './google/google.service';
 import { QueueModule } from './taxi-manager/requests/queue.module';
-import 'dotenv/config';
 import { DriversModule } from './taxi-manager/drivers/drivers.module';
+import 'dotenv/config';
 
 @Module({
   imports: [
@@ -23,6 +23,6 @@ import { DriversModule } from './taxi-manager/drivers/drivers.module';
     GoogleModule,
     QueueModule,
     DriversModule,
-  ]
+  ],
 })
 export class RouterModule {}

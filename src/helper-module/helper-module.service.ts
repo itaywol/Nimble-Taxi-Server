@@ -3,7 +3,6 @@ import { LoggerService } from '../logger/logger.service';
 
 @Injectable()
 export class HelperModuleService {
-
   generateDigitalNumber(digitsCount: number) {
     if (digitsCount <= 0) {
       digitsCount = 6;

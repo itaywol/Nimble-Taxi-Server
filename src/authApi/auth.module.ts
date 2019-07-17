@@ -4,9 +4,9 @@ import { AuthService } from './auth.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from '../schemas/user-schema';
 import { VerifySchema } from '../schemas/verify-schema';
-import { LoggerModule } from 'src/logger/logger.module';
-import { SmsmessagerModule } from 'src/smsmessager/smsmessager.module';
-import { HelperModuleModule } from 'src/helper-module/helper-module.module';
+import { LoggerModule } from '../logger/logger.module';
+import { SmsmessagerModule } from '../smsmessager/smsmessager.module';
+import { HelperModuleModule } from '../helper-module/helper-module.module';
 
 @Module({
   controllers: [AuthController],

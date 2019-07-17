@@ -5,8 +5,8 @@ import { readFileSync } from 'fs';
 
 async function bootstrap() {
   const httpOptions = {
-    key: readFileSync('src/secret/key.pem'),
-    cert: readFileSync('src/secret/cert.pem'),
+    key: readFileSync('./secret/key.pem'),
+    cert: readFileSync('./secret/cert.pem'),
   };
   const router = await NestFactory.create(RouterModule, {
     logger: new LoggerService(),

@@ -15,6 +15,6 @@ export class LoggerService extends Logger {
     super.debug(message.context);
   }
   verbose(message: any, context?: string): void {
-    super.verbose(message,context);
+    super.verbose(message, context);
   }
 }
