@@ -28,39 +28,23 @@ export class RequestsQueue {
     ) {
       job.promote();
     }
+    
     if (!(await this.queueService.fetchTaxis(job.attemptsMade))) {
       await job.moveToFailed({ message: 'couldnt find any taxi' });
       await job.retry();
     } else {
       doneCallBack(null, () => {
-        return job;
+        return {
+          message: "successfuly found a driver",
+          data: job
+        };
       });
     }
     doneCallBack(null, () => {
-      return job;
+      return {
+        message: "couldn't find a driver",
+        data: job
+      }
     });
-  }
-
-  @OnQueueCleaned()
-  onCleaned() {}
-
-  @OnQueueProgress()
-  onProgress(job: Job) {
-    this.loggerService.log(`Progress in job: ${job.id}`);
-  }
-
-  @OnQueueActive()
-  onActive(job: Job) {
-    this.loggerService.log(`Active job ${job.id}`);
-  }
-
-  @OnQueueCompleted()
-  onCompleted(job: Job) {
-    this.loggerService.log(`Completed job ${job.id}`);
-  }
-
-  @OnGlobalQueueFailed()
-  onFailed(job: Job) {
-    this.loggerService.warn(`Job ${job.id} has failed`);
   }
 }

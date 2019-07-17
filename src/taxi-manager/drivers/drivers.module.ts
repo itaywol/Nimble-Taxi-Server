@@ -10,5 +10,6 @@ import { DriverSchema } from 'src/schemas/driver-schema';
   imports: [
     MongooseModule.forFeature([{ name: 'Drivers', schema: DriverSchema }]),
   ],
+  exports:[DriversService]
 })
 export class DriversModule {}
