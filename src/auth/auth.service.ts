@@ -8,12 +8,11 @@ import {
 import { SmsmessagerService } from 'src/smsmessager/smsmessager.service';
 import { HelperModuleService } from 'src/helper-module/helper-module.service';
 import { UserDto } from 'src/auth/dto/user-dto';
-import { IUser } from 'src/interfaces/user.interface';
+import { IUser } from 'src/auth/interfaces/user.interface';
 import { LoggerService } from 'src/logger/logger.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import Config from 'config';
-import { IVerify } from 'src/interfaces/verify.interface';
+import { IVerify } from 'src/auth/interfaces/verify.interface';
 
 @Injectable()
 export class AuthService {
@@ -108,7 +107,7 @@ export class AuthService {
   }
 
   async deleteAllUsers(password: string) {
-    if (password === Config.admin_password) {
+    if (password === process.env.ADMIN_PASSWORD) {
       LoggerService.warn('Deleting all users');
       return await this.usersModel.deleteMany({}, () => {});
     } else {
