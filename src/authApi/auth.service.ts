@@ -7,12 +7,12 @@ import {
 } from '@nestjs/common';
 import { SmsmessagerService } from 'src/smsmessager/smsmessager.service';
 import { HelperModuleService } from 'src/helper-module/helper-module.service';
-import { UserDto } from 'src/auth/dto/user-dto';
-import { IUser } from 'src/auth/interfaces/user.interface';
+import { UserDto } from './dto/user-dto';
+import { IUser } from './interfaces/user.interface';
 import { LoggerService } from 'src/logger/logger.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { IVerify } from 'src/auth/interfaces/verify.interface';
+import { IVerify } from './interfaces/verify.interface';
 
 @Injectable()
 export class AuthService {
@@ -35,7 +35,10 @@ export class AuthService {
     return await this.verifiesList.findOne(verify).then((item: IVerify) => {
       if (item && item.code === verify.code) {
         this.verifiesList.remove(verify);
-        return this.usersModel.updateOne({ phoneNumber:item.phoneNumber }, { Verified: true });
+        return this.usersModel.updateOne(
+          { phoneNumber: item.phoneNumber },
+          { Verified: true },
+        );
       }
       return HttpStatus.UNAUTHORIZED;
     });
@@ -58,7 +61,7 @@ export class AuthService {
       const { password, ...result } = userData;
       return result;
     }
-    const createdUser = new this.usersModel({...userData,Verified:false});
+    const createdUser = new this.usersModel({ ...userData, Verified: false });
     await this.generateVerficationSms(userData);
     const writtenUser = await createdUser.save();
     LoggerService.log('Registered new User: ' + JSON.stringify(userData));

@@ -9,7 +9,7 @@ export class LoggerService extends Logger {
     super.log(message, context);
   }
   warn(message: any, context?: string): void {
-    super.warn(message,context);
+    super.warn(message, context);
   }
   debug(message: any, context?: string): void {
     throw new Error('Method not implemented.');
