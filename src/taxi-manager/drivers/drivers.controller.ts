@@ -9,7 +9,6 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { DriversService } from './drivers.service';
-import { LoggerService } from 'src/logger/logger.service';
 import { DriverDataDTO } from './dto/driverDataDto';
 
 @Controller('drivers')
@@ -18,52 +17,52 @@ export class DriversController {
 
   @Post()
   async createDriver(@Body() driverData: DriverDataDTO) {
-    return this.driverServices.createDriver(driverData);
+    return await this.driverServices.createDriver(driverData);
   }
 
   @Get()
-  getAllDrivers() {
-    return this.driverServices.getAllDrivers();
+  async getAllDrivers() {
+    return await this.driverServices.getAllDrivers();
   }
 
   @Get(':phone')
-  getSpecificDriver(@Param('phone') phoneAsIdentifier: String) {
-    return this.driverServices.getSpecificDriver(phoneAsIdentifier);
+  async getSpecificDriver(@Param('phone') phoneAsIdentifier: String) {
+    return await this.driverServices.getSpecificDriver(phoneAsIdentifier);
   }
 
   @Put()
-  updateAllDrivers(@Body() driverData: DriverDataDTO) {
-    return this.driverServices.updateAllDrivers(driverData);
+  async updateAllDrivers(@Body() driverData: DriverDataDTO) {
+    return await this.driverServices.updateAllDrivers(driverData);
   }
 
   @Put(':phone')
-  updateSpecificDriver(
+  async updateSpecificDriver(
     @Param('phone') phoneAsIdentifier: String,
     @Body() driverData: DriverDataDTO,
   ) {
-    return this.driverServices.updateSpecificDriver(
+    return await this.driverServices.updateSpecificDriver(
       phoneAsIdentifier,
       driverData,
     );
   }
 
   @Delete()
-  deleteAllDrivers() {
-    return this.driverServices.deleteAllDrivers();
+  async deleteAllDrivers() {
+    return await this.driverServices.deleteAllDrivers();
   }
 
   @Delete(':phone')
-  deleteSpecificDriver(@Param('phone') phoneAsIdentifier: String) {
-    return this.driverServices.deleteSpecificDriver(phoneAsIdentifier);
+  async deleteSpecificDriver(@Param('phone') phoneAsIdentifier: String) {
+    return await this.driverServices.deleteSpecificDriver(phoneAsIdentifier);
   }
 
   @Post('distance/:kilometers')
-  getDriversByDistance(
+  async getDriversByDistance(
     @Body('longtitude', new ParseIntPipe()) longtitude: number,
     @Body('latitude', new ParseIntPipe()) latitude: number,
     @Param('kilometer', new ParseIntPipe()) distanceInKilometers: number,
   ) {
-    return this.driverServices.getAllDriversByDistance(
+    return await this.driverServices.getAllDriversByDistance(
       latitude,
       longtitude,
       distanceInKilometers,

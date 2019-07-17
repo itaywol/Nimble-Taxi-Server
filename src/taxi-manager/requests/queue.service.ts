@@ -8,18 +8,17 @@ import { DriversService } from '../drivers/drivers.service';
 export class QueueService {
   constructor(
     @InjectModel('Drivers') private readonly driversList: Model<IDriver>,
-    private readonly driversServices:DriversService
+    private readonly driversServices: DriversService,
   ) {}
 
   /**
    * itterates over all the taxi driver that are working and tries to find a taxi driver that accepted the job with the same id as the caller passed in
    * @param jobId the job id that this function been called from asked
    */
-  async fetchTaxis(jobId:number) {
-    let drivers:IDriver[] = await this.driversServices.getAllDrivers();
-    drivers.map((driver:IDriver) => {
-      if(driver.jobId==jobId)
-      {
+  async fetchTaxis(jobId: number) {
+    let drivers: IDriver[] = await this.driversServices.getAllDrivers();
+    drivers.map((driver: IDriver) => {
+      if (driver.jobId == jobId) {
         return true;
       }
     });

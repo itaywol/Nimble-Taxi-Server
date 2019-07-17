@@ -1,5 +1,5 @@
 import { IUser } from './user.interface';
-import { PaymentType } from 'src/enums/paymentType.enum';
+import { PaymentType } from '../../enums/paymentType.enum';
 
 export interface Ride {
   from: string;

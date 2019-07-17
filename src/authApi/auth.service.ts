@@ -1,15 +1,9 @@
-import {
-  Injectable,
-  Logger,
-  ForbiddenException,
-  HttpStatus,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { SmsmessagerService } from 'src/smsmessager/smsmessager.service';
-import { HelperModuleService } from 'src/helper-module/helper-module.service';
+import { Injectable, HttpStatus } from '@nestjs/common';
+import { SmsmessagerService } from '../smsmessager/smsmessager.service';
+import { HelperModuleService } from '../helper-module/helper-module.service';
 import { UserDto } from './dto/user-dto';
 import { IUser } from './interfaces/user.interface';
-import { LoggerService } from 'src/logger/logger.service';
+import { LoggerService } from '../logger/logger.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { IVerify } from './interfaces/verify.interface';
@@ -63,7 +57,6 @@ export class AuthService {
     }
     const createdUser = new this.usersModel({ ...userData, Verified: false });
     await this.generateVerficationSms(userData);
-    const writtenUser = await createdUser.save();
     LoggerService.log('Registered new User: ' + JSON.stringify(userData));
     let censoredData = userData;
     delete censoredData.password;

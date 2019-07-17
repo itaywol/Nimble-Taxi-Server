@@ -12,9 +12,9 @@ export class LoggerService extends Logger {
     super.warn(message, context);
   }
   debug(message: any, context?: string): void {
-    throw new Error('Method not implemented.');
+    super.debug(message.context);
   }
   verbose(message: any, context?: string): void {
-    throw new Error('Method not implemented.');
+    super.verbose(message,context);
   }
 }

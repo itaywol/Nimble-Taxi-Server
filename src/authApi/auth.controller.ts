@@ -8,7 +8,6 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { UserDto } from './dto/user-dto';
 import { IUser } from './interfaces/user.interface';

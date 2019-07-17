@@ -9,10 +9,9 @@ async function bootstrap() {
     cert: readFileSync('src/secret/cert.pem'),
   };
   const router = await NestFactory.create(RouterModule, {
-    logger: false,
+    logger: new LoggerService(),
     httpsOptions: httpOptions,
   });
-  router.useLogger(router.get(LoggerService));
   router.enableCors();
   await router.listen(3001);
 }
