@@ -1,4 +1,9 @@
 import {
+  Module,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
+  } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { LoggerService } from './logger/logger.service';
 import { LoggerModule } from './logger/logger.module';
@@ -8,11 +13,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TaxiModule } from './taxi/taxi.module';
 import { GoogleService } from './google/google.service';
 import { GoogleModule } from './google/google.module';
-  Module,
-  NestModule,
-  MiddlewareConsumer,
-  RequestMethod,
-} from '@nestjs/common';
 import "dotenv/config";
 
 @Module({

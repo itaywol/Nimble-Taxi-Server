@@ -27,27 +27,25 @@ export class AuthService {
    * VerifyUser:
    * is called from the controller(/auth/verify)
    * checks if the user entered the right verfication code
+   * TODO:refactor and beutify the code
    * @param verify: takes an IVerfy(interface) oriented parameters
    */
   async verifyUser(verify: IVerify) {
     LoggerService.log('Verifing one user:' + JSON.stringify(verify));
     return await this.verifiesList.findOne(verify).then((item: IVerify) => {
       if (item && item.code === verify.code) {
-        this.verifiesList.findOneAndRemove(verify);
-        return this.usersModel
-          .findOne({ phoneNumber: item.phoneNumber })
-          .updateOne({ Verified: false }, { Verified: true });
+        this.verifiesList.remove(verify);
+        return this.usersModel.updateOne({ phoneNumber:item.phoneNumber }, { Verified: true });
       }
       return HttpStatus.UNAUTHORIZED;
     });
   }
 
   async generateVerficationSms(userData: UserDto) {
-    const user: IUser = { ...userData, Verified: false };
     const digitalCode = this.helperModule.generateDigitalNumber(6);
     this.smsMessager.composeVerifyMessage(userData.phoneNumber, digitalCode);
     const newVerify = {
-      phoneNumber: user.phoneNumber,
+      phoneNumber: userData.phoneNumber,
       code: digitalCode,
     } as IVerify;
     const verifyEntry = new this.verifiesList(newVerify);
@@ -60,13 +58,13 @@ export class AuthService {
       const { password, ...result } = userData;
       return result;
     }
-    const user: IUser = { ...userData, Verified: false };
-    const createdUser = new this.usersModel(user);
+    const createdUser = new this.usersModel({...userData,Verified:false});
     await this.generateVerficationSms(userData);
     const writtenUser = await createdUser.save();
-    const { password, ...result } = user;
     LoggerService.log('Registered new User: ' + JSON.stringify(userData));
-    return result;
+    let censoredData = userData;
+    delete censoredData.password;
+    return censoredData;
   }
 
   async loginUser(userData: UserDto) {
@@ -96,9 +94,7 @@ export class AuthService {
         ' to ' +
         JSON.stringify(newUserData),
     );
-    return await this.usersModel
-      .findOne(userData)
-      .updateMany(userData, newUserData);
+    return await this.usersModel.updateMany(userData, newUserData);
   }
 
   async deleteUser(userData: IUser) {
