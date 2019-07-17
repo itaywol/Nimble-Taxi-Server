@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
-import { DriverDataDTO } from '../taxi/dto/driverDataDto';
+import { DriverDataDTO } from './dto/driverDataDto';
 import { LoggerService } from 'src/logger/logger.service';
 import { DriversService } from './drivers.service';
 
