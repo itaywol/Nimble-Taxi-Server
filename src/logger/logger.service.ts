@@ -1,5 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 
+/**
+ * self defined logger for ruture use
+ * currently functioning the same as default logger
+ */
 @Injectable()
 export class LoggerService extends Logger {
   error(message: any, trace?: string, context?: string): void {

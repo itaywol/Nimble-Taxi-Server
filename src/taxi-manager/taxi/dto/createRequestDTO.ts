@@ -1,3 +1,6 @@
+/**
+ * data transfer object for creating a taxi request
+ */
 export class CreateRequestDTO {
   readonly phoneNumber: String;
   readonly pickUpLocation: String;

@@ -11,6 +11,11 @@ export class SmsmessagerService {
   });
   constructor(private readonly loggerService: LoggerService) {}
 
+  /**
+   * sends an sms message(currently only to 972544207711 registered in the api) because nexmo is free and not pro
+   * @param to phone number 
+   * @param additionalText additional text to apply for the verfication message
+   */
   composeVerifyMessage(to: string, additionalText: string) {
     try {
       let placeHolderPhone;
@@ -28,6 +33,11 @@ export class SmsmessagerService {
     }
   }
 
+  /**
+   * simple phone validation based on characters length
+   * TODO:verify country code and that all of the characters are numbers ....
+   * @param phoneNumber 
+   */
   validatePhoneNumber(phoneNumber: string) {
     if (phoneNumber.length == 12) {
       return true;
@@ -35,6 +45,10 @@ export class SmsmessagerService {
     return false;
   }
 
+  /**
+   * convert a phone number that starts in local 0 to 972 global il number
+   * @param phoneNumber the phone number with local phone prefix
+   */
   convertFromLocalToGlobal(phoneNumber: string) {
     if (phoneNumber.indexOf('0') == 0) {
       return phoneNumber.slice(1).padStart(3, '972');

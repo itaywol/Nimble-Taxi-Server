@@ -21,7 +21,6 @@ export class AuthService {
    * VerifyUser:
    * is called from the controller(/auth/verify)
    * checks if the user entered the right verfication code
-   * TODO:refactor and beutify the code
    * @param verify: takes an IVerfy(interface) oriented parameters
    */
   async verifyUser(verify: IVerify) {
@@ -37,7 +36,10 @@ export class AuthService {
       return HttpStatus.UNAUTHORIZED;
     });
   }
-
+  /**
+   * generate a verfication sms to the user
+   * @param userData to fetch the user and use its data to send an sms message
+   */
   async generateVerficationSms(userData: UserDto) {
     const digitalCode = this.helperModule.generateDigitalNumber(6);
     this.smsMessager.composeVerifyMessage(userData.phoneNumber, digitalCode);
@@ -49,6 +51,12 @@ export class AuthService {
     return await verifyEntry.save();
   }
 
+  /**
+   * register the user to the db
+   * first validate if it dont exist
+   * then registers
+   * @param userData the user data as userDTO object
+   */
   async registerUser(userData: UserDto) {
     const checkIfRegistered = await this.fetchOneUser(userData);
     if (checkIfRegistered) {
@@ -63,6 +71,12 @@ export class AuthService {
     return censoredData;
   }
 
+  /**
+   * calls to login the user return ok if managed to login or unauthorized if not
+   * TODO:take a auth_token and not a user
+   * TODO:response message shouldnt be an HTTPStatus, done it temporarly
+   * @param userData 
+   */
   async loginUser(userData: UserDto) {
     return await this.fetchOneUser(userData).then(props => {
       if (props.password != userData.password) {
@@ -72,32 +86,45 @@ export class AuthService {
     });
   }
 
+  /**
+   * finds one user from the model
+   * @param userData takes user data as paramters for find in db query
+   */
   async fetchOneUser(userData: UserDto): Promise<IUser> {
     const user = await this.usersModel.findOne(userData);
     LoggerService.log('Fetched one user: ' + JSON.stringify(user));
     return user;
   }
 
+  /**
+   * returns all users from the db
+   */
   async fetchAllUsers() {
     LoggerService.log('Trying to Fetch all users');
     return await this.usersModel.find().exec();
   }
 
-  async changeUser(userData: IUser, newUserData: IUser): Promise<IUser> {
-    LoggerService.log(
-      'Updating user from: ' +
-        JSON.stringify(userData) +
-        ' to ' +
-        JSON.stringify(newUserData),
-    );
-    return await this.usersModel.updateMany(userData, newUserData);
+  /**
+   * changes the user
+   * @param userPhone as identifier for the fetching
+   * @param newUserData as new data to apply to the found user
+   */
+  async changeUser(userPhone: String, newUserData: IUser): Promise<IUser> {
+    return await this.usersModel.updateMany({phoneNumber:userPhone}, newUserData);
   }
 
-  async deleteUser(userData: IUser) {
-    LoggerService.warn('Deleting one User: ' + JSON.stringify(userData));
-    return await this.usersModel.deleteOne(userData);
+  /**
+   * delete a user from the db with specific phone number
+   * @param phoneNumber as identifier for the user, find the user based on this paramter
+   */
+  async deleteUser(phoneNumber: String) {
+    return await this.usersModel.remove({phoneNumber:phoneNumber});
   }
 
+  /**
+   * delete all users from the model
+   * @param password the admin password that is defined inside the .env file
+   */
   async deleteAllUsers(password: string) {
     if (password === process.env.ADMIN_PASSWORD) {
       LoggerService.warn('Deleting all users');

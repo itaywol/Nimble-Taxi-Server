@@ -26,6 +26,13 @@ export class GoogleService {
     return null;
   }
 
+  /**
+   * finds the route using the google routes api using cordinates(origin,destination)
+   * @param originLon origin Longtitude
+   * @param originLat origin Latitude
+   * @param destinationLon destination Longtitude
+   * @param destinationLat destination Latitude
+   */
   async queryRouteFromGoogleCords(
     originLon: number,
     originLat: number,
@@ -39,6 +46,11 @@ export class GoogleService {
     });
   }
 
+  /**
+   * finds a route to place using places name
+   * @param origin origin place name
+   * @param destination destination place name
+   */
   async queryRouteFromGooglePlaces(origin: String, destination: String) {
     await Axios.get(
       `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&language=iw&region=il&key=${apiKey}`,

@@ -8,6 +8,9 @@ import { LoggerModule } from '../logger/logger.module';
 import { SmsmessagerModule } from '../smsmessager/smsmessager.module';
 import { HelperModuleModule } from '../helper-module/helper-module.module';
 
+/**
+ * wraps all the module for injectables, and specifiy which modules am i using in my services....
+ */
 @Module({
   controllers: [AuthController],
   providers: [AuthService],

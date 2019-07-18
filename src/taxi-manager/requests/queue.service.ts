@@ -15,10 +15,10 @@ export class QueueService {
    * itterates over all the taxi driver that are working and tries to find a taxi driver that accepted the job with the same id as the caller passed in
    * @param jobId the job id that this function been called from asked
    */
-  async fetchTaxis(jobId: number) {
+  async fetchTaxis(jobId: string | number) {
     let drivers: IDriver[] = await this.driversServices.getAllDrivers();
     drivers.map((driver: IDriver) => {
-      if (driver.jobId == jobId) {
+      if (driver.jobId.toString() === jobId) {
         return true;
       }
     });

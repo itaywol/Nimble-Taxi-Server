@@ -19,6 +19,14 @@ export class RequestsQueue {
     private readonly loggerService: LoggerService,
   ) {}
 
+  /**
+   * when a queue job is created this is the entry point
+   * it tries to fetch a driver that accepeted the request using the queueService.fetch taxis
+   * retries 3 times with higher priority
+   * then if it didnt find then fail
+   * @param job the job with the data that passed in
+   * @param doneCallBack a callback to finish the job
+   */
   @QueueProcess({ name: 'request' })
   async createRequest(job: Job<CreateRequestDTO>, doneCallBack: DoneCallback) {
     if (
@@ -29,7 +37,7 @@ export class RequestsQueue {
       job.promote();
     }
 
-    if (!(await this.queueService.fetchTaxis(job.attemptsMade))) {
+    if (!(await this.queueService.fetchTaxis(job.id))) {
       await job.moveToFailed({ message: 'couldnt find any taxi' });
       await job.retry();
     } else {
