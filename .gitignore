@@ -387,10 +387,4 @@ Temporary Items
 
 =======
 # Local
-docker-compose.yml
-<<<<<<< HEAD
-=======
-docker-compose.p.yml
->>>>>>> d96ce3de6f91b3d229723210d91ff478e8aba5c1
-.env
 dist
