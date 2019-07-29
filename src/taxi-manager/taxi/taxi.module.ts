@@ -5,8 +5,8 @@ import { QueueService } from '../requests/queue.service';
 import { BullModule } from 'nest-bull';
 import { RequestsQueue } from '../requests/requests-queue';
 import 'dotenv/config';
-import { LoggerModule } from 'src/logger/logger.module';
-import { HelperModuleModule } from 'src/helper-module/helper-module.module';
+import { LoggerModule } from '../../logger/logger.module';
+import { HelperModuleModule } from '../../helper-module/helper-module.module';
 import { DriversModule } from '../drivers/drivers.module';
 import { QueueModule } from '../requests/queue.module';
 

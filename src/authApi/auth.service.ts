@@ -7,6 +7,7 @@ import { LoggerService } from '../logger/logger.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { IVerify } from './interfaces/verify.interface';
+import 'dotenv/config';
 
 @Injectable()
 export class AuthService {
@@ -58,7 +59,7 @@ export class AuthService {
     const createdUser = new this.usersModel({ ...userData, Verified: false });
     await this.generateVerficationSms(userData);
     LoggerService.log('Registered new User: ' + JSON.stringify(userData));
-    let censoredData = userData;
+    const censoredData = userData;
     delete censoredData.password;
     return censoredData;
   }

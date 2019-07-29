@@ -5,8 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DriverSchema } from '../../schemas/driver-schema';
 import { LoggerService } from '../../logger/logger.service';
 import { HelperModuleService } from '../../helper-module/helper-module.service';
-import { HelperModuleModule } from 'src/helper-module/helper-module.module';
-import { LoggerModule } from 'src/logger/logger.module';
+import { HelperModuleModule } from '../../helper-module/helper-module.module';
+import { LoggerModule } from '../../logger/logger.module';
 
 @Module({
   controllers: [DriversController],

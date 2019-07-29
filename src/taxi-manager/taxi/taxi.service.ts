@@ -2,6 +2,7 @@ import { Injectable, HttpStatus } from '@nestjs/common';
 import { InjectQueue } from 'nest-bull';
 import { Queue } from 'bull';
 import { CreateRequestDTO } from './dto/createRequestDTO';
+import 'dotenv/config';
 
 @Injectable()
 export class TaxiService {
@@ -47,7 +48,7 @@ export class TaxiService {
     };
   }
   async createRequest(createRequestDTO: CreateRequestDTO) {
-    let job = await this.queue.add('request', createRequestDTO, {
+    const job = await this.queue.add('request', createRequestDTO, {
       delay: 5000,
     });
     return HttpStatus.OK;
